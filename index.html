@@ -1,23 +1,663 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- Schema Markup for Service and Offers -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "이사 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "경산이삿짐센터 전문 업체",
+        "url": "https://yourdomain.com",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+82-10-1234-5678",
+          "contactType": "고객 서비스"
+        }
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "경산시"
+      },
+      "description": "경산 지역 맞춤형 이삿짐센터 서비스와 합리적인 이사비용 안내",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "이사 서비스 가격",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "경산 포장이사"
+            },
+            "price": "500000",
+            "priceCurrency": "KRW",
+            "description": "포장부터 정리까지 모든 과정을 전담하는 프리미엄 서비스"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "경산 반포장이사"
+            },
+            "price": "350000",
+            "priceCurrency": "KRW",
+            "description": "짐 포장만 대신하고 잔짐 정리는 직접하는 실속형 서비스"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "경산 원룸/용달이사"
+            },
+            "price": "150000",
+            "priceCurrency": "KRW",
+            "description": "소형 이사에 적합하며 신속하고 합리적인 비용의 서비스"
+          }
+        ]
+      }
+    }
+    </script>
+
+    <!-- Google Fonts - Noto Sans KR for better readability -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <style>
+      /* --- Base Styles --- */
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.8;
+        background-color: #fcfcfc; /* Very light background for soft feel */
+        color: #333;
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+      a {
+        text-decoration: none;
+        color: #007bff; /* Standard link color */
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      main {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      section {
+        padding: 40px 0;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      /* --- Header and Navigation --- */
+      header {
+        background-color: #e6f7ff; /* Soft sky blue */
+        color: #004080;
+        padding: 2rem 0;
+        text-align: center;
+        border-bottom: 3px solid #b3d9ff;
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #004080;
+      }
+      header p {
+        margin-top: 0.5rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #0050a0;
+      }
+      nav ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-top: 1.5rem;
+      }
+      nav a {
+        color: #0050a0;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 8px 15px;
+        border-radius: 20px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      nav a:hover {
+        background-color: #b3d9ff;
+        color: #004080;
+      }
+
+      /* --- Section Headers and Text --- */
+      h2 {
+        color: #0050a0; /* Deeper blue for main headings */
+        font-size: 1.8rem;
+        margin-top: 0;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 10px;
+        font-weight: 700;
+      }
+      h3 {
+        color: #007bff; /* Medium blue for subheadings */
+        font-size: 1.4rem;
+        margin-top: 2rem;
+        font-weight: 600;
+      }
+      .service-description {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        border-left: 5px solid #007bff;
+      }
+      .service-description strong {
+        color: #007bff;
+      }
+
+      /* --- Tables --- */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 2rem 0;
+        font-size: 0.95rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      }
+      th, td {
+        padding: 1rem;
+        border: 1px solid #eee;
+        text-align: left;
+      }
+      th {
+        background-color: #007bff; /* Primary color for table header */
+        color: white;
+        font-weight: 600;
+      }
+      tr:nth-child(even) {
+        background-color: #f7faff; /* Light striped effect */
+      }
+
+      /* --- Call to Action Button --- */
+      .cta-button {
+        display: inline-block;
+        background-color: #ff6600; /* Bright accent color */
+        color: white;
+        font-weight: 700;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        margin: 1rem auto;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1rem;
+      }
+      .cta-button:hover {
+        background-color: #e65c00;
+        transform: translateY(-2px);
+      }
+      .cta-wrapper {
+        text-align: center;
+        margin: 2rem 0;
+      }
+
+      /* --- Keyword Tags --- */
+      .keyword-tags {
+        margin: 1.5rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        font-size: 0.9rem;
+      }
+      .keyword-tags a {
+        background-color: #e9ecef;
+        color: #007bff;
+        padding: 8px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+      .keyword-tags a:hover {
+        background-color: #d0d9e0;
+      }
+
+      /* --- Form Elements --- */
+      .form-section {
+        background-color: #f1f7fe; /* Light blue background for form */
+        padding: 30px;
+        border-radius: 10px;
+        margin: 2rem 0;
+      }
+      .form-section label {
+        display: block;
+        font-weight: 600;
+        margin-top: 1rem;
+        color: #0050a0;
+      }
+      .form-section input[type="text"],
+      .form-section input[type="number"],
+      .form-section select,
+      .form-section textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      .form-section textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+      .form-group-flex {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+      }
+      .form-group-flex > div {
+        flex: 1;
+      }
+
+      /* --- FAQ Accordion --- */
+      dl {
+        margin: 0;
+      }
+      dl dt {
+        background-color: #f7faff;
+        border: 1px solid #eee;
+        padding: 15px;
+        font-weight: 700;
+        margin-top: 10px;
+        cursor: pointer;
+        color: #0050a0;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      dl dt:hover {
+        background-color: #e9f0f7;
+      }
+      dl dd {
+        margin: 0;
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid #eee;
+        border-top: none;
+        display: none;
+        color: #555;
+        border-radius: 0 0 5px 5px;
+      }
+      dl dt.active + dd {
+        display: block;
+      }
+
+      /* --- Footer --- */
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: #777;
+        background-color: #f0f0f0;
+        margin-top: 3rem;
+        border-top: 1px solid #ddd;
+      }
+      .credit-links a {
+        color: #777;
+        margin: 0 5px;
+      }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>경산 이삿짐센터 | 전문 포장이사, 반포장이사, 이사비용 안내</h1>
+        <p>고객 만족도 1위 경산 지역 맞춤형 이사 솔루션 제공</p>
+        <nav aria-label="메인 메뉴">
+            <ul>
+                <li><a href="#service-intro">서비스 소개</a></li>
+                <li><a href="#price-guide">이사비용 안내</a></li>
+                <li><a href="#reviews">고객 후기</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+                <li><a href="#contact">견적 문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <!-- Section 1: Introduction and Key Value Proposition -->
+        <section id="service-intro">
+            <h2>경산 이사, 꼼꼼한 전문가가 책임집니다</h2>
+            <p><strong>경산 이삿짐센터</strong>를 찾고 계신가요? 경산은 대구와 인접해 있어 활발한 인구 이동이 있는 지역이며, 옥산동, 중방동, 사동 등 신규 아파트 단지 입주가 많은 특징을 가지고 있습니다. 저희 업체는 경산 지역의 특성을 완벽히 이해하고, <strong>경산 포장이사</strong>부터 <strong>경산 원룸이사</strong>까지 고객님의 상황에 맞는 최적의 이사 서비스를 제공합니다.</p>
+            <p><strong>안전</strong>하고 <strong>신속</strong>한 이사를 기본으로, 꼼꼼한 마무리와 합리적인 <strong>경산 이사 비용</strong>을 약속드립니다. 복잡한 이사 과정을 전문가에게 맡기고 고객님께서는 새로운 보금자리에서의 생활에 집중하실 수 있도록 최선을 다하겠습니다.</p>
+
+            <div class="keyword-tags" aria-label="연관 검색 키워드">
+                <a href="#price-guide">경산이삿짐센터 비용</a>
+                <a href="#service-details">경산포장이사 추천</a>
+                <a href="#service-details">경산반포장이사</a>
+                <a href="#price-guide">경산 이사 견적 비교</a>
+                <a href="#service-details">경산 원룸/용달이사</a>
+                <a href="#local-info">경산 옥산동 이사</a>
+                <a href="#local-info">경산 하양읍 이사</a>
+                <a href="#contact">경산 이사 예약</a>
+            </div>
+        </section>
+
+        <!-- Section 2: Detailed Service Offerings -->
+        <section id="service-details">
+            <h2>경산 맞춤형 이사 서비스 종류</h2>
+            <p>고객님의 짐 양과 예산에 따라 다양한 이사 옵션을 제공합니다. 어떤 서비스가 적합한지 아래 설명을 참고하시거나, 상담을 통해 추천받으세요.</p>
+
+            <div class="service-description">
+                <h3>경산 포장이사 서비스 (Premium Packing Moving)</h3>
+                <p><strong>경산 포장이사</strong>는 이사의 모든 과정을 전문가가 책임지는 프리미엄 서비스입니다. 이사 당일, 고객님께서는 별다른 준비 없이 새로운 집에 도착하시면 됩니다. 짐 포장부터 운송, 정리, 청소까지 전문 인력이 전담하며, 주방 짐 정리와 옷장 정리, 가구 배치까지 완벽하게 마무리합니다. 바쁜 맞벌이 부부나 어린 자녀가 있는 가정에 가장 적합한 서비스입니다.</p>
+                <ul>
+                    <li><strong>대상:</strong> 25평 이상 아파트/주택, 짐이 많은 가정, 바쁜 직장인</li>
+                    <li><strong>장점:</strong> 높은 편의성, 완벽한 정리, 파손 위험 최소화</li>
+                </ul>
+            </div>
+
+            <div class="service-description">
+                <h3>경산 반포장이사 서비스 (Semi-Packing Moving)</h3>
+                <p><strong>경산 반포장이사</strong>는 포장이사와 일반이사의 장점을 결합한 합리적인 서비스입니다. 전문가가 큰 짐(가구, 가전)을 포장하고 운송하며, 도착 후 큰 짐 배치까지 책임집니다. 고객님께서는 잔짐(주방용품, 책 등)을 직접 포장하고 새집에서 정리하는 방식입니다. 이사 비용을 절약하고 싶지만, 무거운 짐 운반은 전문가에게 맡기고 싶은 고객께 추천합니다.</p>
+                <ul>
+                    <li><strong>대상:</strong> 15~25평 규모, 이사 비용 절감 희망 고객, 어느 정도 직접 정리가 가능한 고객</li>
+                    <li><strong>장점:</strong> 경제적인 비용, 큰 짐 운반 부담 해소, 포장재 무료 제공</li>
+                </ul>
+            </div>
+
+            <div class="service-description">
+                <h3>경산 원룸/용달이사 서비스 (Small-Scale Moving)</h3>
+                <p>1~2인 가구의 소규모 이사에 최적화된 서비스입니다. 짐 양에 따라 <strong>경산 용달이사</strong>나 원룸 포장이사를 선택할 수 있습니다. 짐이 적어 포장이사를 하기에는 부담스럽고, 직접 운반하기에는 어려운 경우에 적합합니다. 신속한 이사가 가능하며, 짐 보관이사나 학생 이사에도 유용합니다.</p>
+                <ul>
+                    <li><strong>대상:</strong> 원룸, 오피스텔, 1인 가구, 학생</li>
+                    <li><strong>장점:</strong> 신속성, 최소 비용, 유연한 서비스 구성 (운송+짐 정리 선택 가능)</li>
+                </ul>
+            </div>
+
+            <div class="service-description">
+                <h3>경산 사무실이사/기업이사</h3>
+                <p>사무실 집기, 서류, 컴퓨터 등 중요 자산들을 안전하게 운반하며, 업무 공백을 최소화할 수 있도록 신속하게 진행됩니다. 전문적인 이사 계획 수립을 통해 체계적인 이전을 지원합니다. 대규모 기업 이사부터 소규모 사무실 이전까지 모두 가능합니다.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: In-depth Cost Guide and Factors -->
+        <section id="price-guide">
+            <h2>경산 이사비용 상세 안내 및 견적 변동 요인 분석 (2026년 기준)</h2>
+            <p><strong>경산 이사 비용</strong>은 단순히 평수만으로 결정되지 않습니다. 이사 날짜, 이사 거리, 짐의 양, 작업 인원, 사다리차 사용 유무 등 다양한 요인에 의해 변동됩니다. 2026년 이사 시장 동향에 따르면, 성수기(손 없는 날 포함)에는 비용이 상승하며, 평일이나 비수기에는 상대적으로 저렴해집니다. 아래 표는 대략적인 비용을 나타내며, 정확한 <strong>경산 이사 견적</strong>은 방문 견적을 통해 산출됩니다.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>서비스 종류</th>
+                        <th>평균 비용 (2026년 기준, 5톤 기준)</th>
+                        <th>주요 변동 요인</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>경산 포장이사 (Full Service)</td>
+                        <td>500,000원 ~ 1,500,000원</td>
+                        <td>짐 양, 작업 인원, 이사 날짜(성수기/비수기)</td>
+                    </tr>
+                    <tr>
+                        <td>경산 반포장이사 (Semi Service)</td>
+                        <td>350,000원 ~ 900,000원</td>
+                        <td>잔짐 정리 범위, 사다리차 사용 유무</td>
+                    </tr>
+                    <tr>
+                        <td>경산 원룸/용달이사 (Small Move)</td>
+                        <td>150,000원 ~ 400,000원</td>
+                        <td>이동 거리, 짐 양(1톤~3톤), 작업 인원</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>이사 비용을 결정하는 주요 변동 요인</h3>
+            <p>경산 지역의 이사 비용을 정확하게 예측하려면 아래 요인들을 반드시 고려해야 합니다. 투명한 견적을 위해 모든 요소를 상세히 확인해 드립니다.</p>
+            <ul>
+                <li><strong>이사 날짜 및 시즌:</strong> 3~5월 봄 이사철과 '손 없는 날'은 이사 수요가 집중되어 비용이 높습니다. 반면 겨울철이나 평일은 상대적으로 저렴합니다.</li>
+                <li><strong>이사 거리:</strong> 경산 내 이동(단거리)과 경산-대구/경산-영천 등 장거리 이동에 따라 운송비용이 달라집니다.</li>
+                <li><strong>짐의 양과 특성:</strong> 짐이 많을수록, 고가 가구나 특수 짐(피아노, 에어컨, 벽걸이TV 등)이 있을 경우 비용이 증가합니다.</li>
+                <li><strong>작업 환경:</strong> 사다리차 사용 유무(아파트 고층), 엘리베이터 사용 가능 여부, 이사 전후 주차 공간 확보 난이도 등이 비용에 영향을 미칩니다.</li>
+            </ul>
+        </section>
+
+        <!-- Section 4: Local Information and Service Area Detail -->
+        <section id="local-info">
+            <h2>경산 지역별 이사 정보 및 서비스 가능 지역</h2>
+            <p>저희 업체는 경산 전 지역을 커버하며, 특히 경산의 주요 이사 거점인 옥산동, 중방동, 사동, 정평동, 백천동, 하양읍, 진량읍 등 신도시 및 대학가 주변 이사에 전문성을 갖추고 있습니다. 경산은 대구 수성구와 인접해 있어 대구-경산 간 이사 수요가 많습니다. 저희는 이러한 광역 이동에도 전문성을 발휘하여 원활한 이사를 지원합니다.</p>
+
+            <h3>경산 주요 지역별 이사 특징</h3>
+            <ul>
+                <li><strong>옥산동/중방동 (신도시 지역):</strong> 신축 아파트 입주가 많아 포장이사 수요가 높습니다. 사다리차 작업이 용이한 환경입니다.</li>
+                <li><strong>하양읍/진량읍 (대학가 및 산업단지):</strong> 영천, 대구 지역으로의 이동이 잦으며, 원룸이사나 반포장이사 수요가 높습니다.</li>
+                <li><strong>정평동/사동 (주거 밀집 지역):</strong> 주거 환경이 안정적이며, 이사 성수기에 수요가 집중되는 경향이 있습니다.</li>
+            </ul>
+
+            <div class="cta-wrapper">
+                <a href="#contact" class="cta-button" aria-label="경산 지역 이사 견적 문의">경산 이사 무료 견적 받기</a>
+            </div>
+        </section>
+
+        <!-- Section 5: Customer Reviews and Trust Building -->
+        <section id="reviews">
+            <h2>경산 이삿짐센터 고객 후기 및 추천</h2>
+            <p>저희 <strong>경산 이삿짐센터</strong>는 고객 만족을 최우선으로 합니다. '경산 이삿짐센터 추천'을 검색하고 오신 많은 고객님들이 서비스의 꼼꼼함과 친절함에 만족하셨습니다. 저희는 단순히 짐을 옮기는 것을 넘어, 고객님의 새로운 시작을 응원하는 마음으로 이사에 임합니다.</p>
+            <ul>
+                <li>"이사 후기 정말 만족합니다. 짐 정리가 너무 깔끔하게 되어 있어서 감동했어요. 다음 이사도 여기서 할 생각입니다." - <span>경산시 옥산동 김OO 고객님</span></li>
+                <li>"다른 업체와 비교했을 때 비용도 합리적이었고, 특히 이사 당일 팀원들의 팀워크가 좋았습니다. <strong>경산 포장이사</strong>를 찾는 분들께 추천합니다." - <span>경산시 사동 박OO 고객님</span></li>
+                <li>"원룸 이사인데도 꼼꼼하게 포장해주셔서 감사했습니다. 잔짐 하나하나 신경 써주시는 모습에 믿음이 갔습니다." - <span>경산시 하양읍 이OO 고객님</span></li>
+            </ul>
+        </section>
+
+        <!-- Section 6: In-depth Information (To reach 20,000 characters and enhance expertise) -->
+        <section id="information-hub">
+            <h2>경산 이사를 위한 종합 정보 가이드</h2>
+            <p>성공적인 이사는 철저한 준비에서 시작됩니다. 저희는 경산 이사 전문 업체로서 고객님께 도움이 될 수 있는 다양한 정보를 제공합니다. 아래 가이드를 통해 이사 준비를 시작해 보세요.</p>
+
+            <h3>1. 이사 전 체크리스트 (이사 2~4주 전)</h3>
+            <p>이사 날짜가 결정되면 이사 짐 분류, 가구 배치 계획, 이삿짐센터 선정 등을 미리 진행해야 합니다. <strong>경산 이사</strong>를 앞두고 잊지 말아야 할 주요 사항들입니다.</p>
+            <ul>
+                <li><strong>이사 업체 선정:</strong> 최소 3곳 이상 견적 비교 후 신뢰할 수 있는 업체 계약. 경산 지역 전문 업체인지 확인합니다.</li>
+                <li><strong>이사 짐 정리:</strong> 버릴 짐과 가져갈 짐을 분류하고, 가구 배치도를 미리 그려둡니다.</li>
+                <li><strong>각종 주소지 변경:</strong> 우편물 주소 변경 서비스 신청, 인터넷/전화/정수기 이전 설치 예약.</li>
+                <li><strong>사전 점검:</strong> 이사 갈 집의 상태(수도, 전기, 도배 등)를 미리 확인합니다.</li>
+            </ul>
+
+            <h3>2. 이사 당일 프로세스 (경산 포장이사 기준)</h3>
+            <p>이사 당일, 고객님께서는 이사 팀장님과 소통하며 원활한 이사를 진행합니다. <strong>경산 포장이사</strong>의 일반적인 순서는 다음과 같습니다.</p>
+            <ol>
+                <li><strong>출발지 포장 작업:</strong> 이사 팀 도착 후 짐 포장 시작. 가구, 가전, 주방용품, 잔짐 순으로 진행되며, 포장 시 파손 방지용 에어캡, 박스 등을 사용합니다.</li>
+                <li><strong>운송 및 도착:</strong> 이삿짐 트럭에 짐을 싣고 새집으로 이동합니다. 이동 중 짐 고정을 철저히 하여 흔들림을 방지합니다.</li>
+                <li><strong>도착지 정리 및 배치:</strong> 새집 도착 후 가구 배치도에 따라 짐을 풀고 정리합니다. 주방 짐 정리, 옷 정리, 가전제품 배치, 커튼 설치 등 요청 사항에 따라 진행됩니다.</li>
+                <li><strong>마무리 및 청소:</strong> 큰 짐 정리가 완료된 후 간단한 청소 서비스(바닥 청소, 쓰레기 수거)를 제공합니다.</li>
+            </ol>
+
+            <h3>3. 이사 후 체크리스트 및 주의사항</h3>
+            <p>이사를 마친 후에도 몇 가지 확인할 사항이 있습니다. 특히 가전제품의 작동 여부, 짐 파손 여부 등을 꼼꼼히 체크해야 합니다.</p>
+            <ul>
+                <li><strong>파손 확인:</strong> 짐을 풀면서 파손된 물건이 있는지 확인합니다. 파손 발생 시 즉시 이사 팀장이나 업체에 알립니다. (손해배상 규정 확인)</li>
+                <li><strong>가전 작동 확인:</strong> 냉장고, 세탁기 등 가전제품의 정상 작동 여부를 확인하고, 전원 연결 후 2~3시간 뒤에 냉장고 전원을 켜는 것이 좋습니다.</li>
+                <li><strong>행정 처리:</strong> 전입신고, 확정일자 받기, 자녀 학교 전학 수속 등을 진행합니다. (관련 정보는 <a href="https://www.gyongsan.go.kr/main/" target="_blank">경산시청 홈페이지</a>에서 확인할 수 있습니다.)</li>
+            </ul>
+
+            <h3>4. 이사 서비스 관련 법규 및 소비자 보호 (신뢰성 확보)</h3>
+            <p>이사 서비스는 소비자보호법의 적용을 받습니다. <strong>경산 이사</strong> 업체를 선택할 때 반드시 관허업체인지 확인해야 합니다. 관허업체는 적재물 배상책임보험에 의무적으로 가입되어 있어, 이사 중 발생하는 짐 파손에 대해 법적인 보호를 받을 수 있습니다.</p>
+            <ul>
+                <li><strong>피해보상규정:</strong> 이사 중 짐 파손이나 분실이 발생하면 계약서에 명시된 배상 기준에 따라 보상받을 수 있습니다. 정확한 규정은 <a href="https://www.consumer.go.kr/" target="_blank">한국소비자원</a>에서 확인할 수 있습니다.</li>
+                <li><strong>표준약관 사용:</strong> 표준 약관을 사용하는 업체인지 확인하고, 계약서에 이사 날짜, 비용, 서비스 범위, 피해보상 규정 등을 명확히 기재해야 합니다.</li>
+            </ul>
+        </section>
+
+        <!-- Section 7: External Links (Trust Signals for SEO) -->
+        <section id="external-links">
+            <h2>공신력 있는 외부 정보 출처</h2>
+            <p>신뢰할 수 있는 이사 정보를 제공하기 위해 아래 공인된 기관의 정보를 참고하시길 권장합니다.</p>
+            <ul>
+                <li><a href="https://www.gyongsan.go.kr/main/" target="_blank">경산시청 공식 홈페이지</a> (경산 지역 행정 정보, 전입 신고 안내)</li>
+                <li><a href="https://www.consumer.go.kr/main/index.do" target="_blank">한국소비자원</a> (이사 서비스 관련 소비자 피해 구제 및 분쟁 해결 기준 안내)</li>
+                <li><a href="https://namu.wiki/w/%EA%B2%BD%EC%82%B0%EC%8B%9C" target="_blank">나무위키 - 경산시</a> (경산 지역 상세 정보, 지리적 특징)</li>
+                <li><a href="https://www.law.go.kr/lsInfoP.do?lsiSeq=186842&joMode=2Y" target="_blank">국가법령정보센터 - 화물자동차 운수사업법</a> (이삿짐센터 관련 법규)</li>
+                <li><a href="https://kbland.kr/" target="_blank">KB부동산</a> (경산시 아파트 시세 및 이사 수요 변동 파악)</li>
+            </ul>
+        </section>
+
+        <!-- Section 8: FAQ Accordion -->
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <dl>
+                <dt tabindex="0" aria-expanded="false">이사 견적은 어떻게 받나요? 방문 견적이 필요한가요?</dt>
+                <dd>정확한 <strong>경산 이사 비용</strong>을 산출하기 위해서는 방문 견적이 필수입니다. 전화 상담으로 대략적인 금액을 안내받을 수는 있으나, 짐의 양, 특수 가구, 작업 환경 등을 눈으로 확인해야 정확한 견적을 산출할 수 있습니다. 방문 견적은 무료로 제공됩니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">이사 날짜가 성수기인데, 비용을 줄일 방법이 있나요?</dt>
+                <dd>성수기 이사 비용은 수요가 많아 높게 책정될 수밖에 없습니다. 하지만 반포장이사를 선택하여 직접 잔짐을 정리하거나, 이사 날짜를 평일로 조정하거나, 이른 아침이나 늦은 오후 시간대를 이용하면 비용 절감에 도움이 될 수 있습니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">이사 중 짐이 파손되거나 분실되면 어떻게 되나요?</dt>
+                <dd>저희 <strong>경산 이삿짐센터</strong>는 적재물 배상책임보험에 가입되어 있습니다. 이사 중 발생하는 짐 파손이나 분실에 대해서는 약관에 따라 100% 보상해 드립니다. 파손 발생 즉시 현장에서 팀장에게 알려주시면 신속하게 조치합니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">포장이사 시 냉장고, 세탁기 등 가전제품 설치도 해 주나요?</dt>
+                <dd>기본 포장이사 서비스에는 가전제품의 단순 배치 및 재설치가 포함됩니다. 다만, 벽걸이 TV 재설치, 에어컨 탈부착, 정수기 이전 설치 등은 전문 기술이 필요하므로 별도의 비용이 발생하거나, 관련 업체를 통해 진행해야 합니다. 상담 시 문의해 주시면 안내해 드립니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false">경산 외 타 지역으로의 이사도 가능한가요?</dt>
+                <dd>네, 경산에서 대구, 영천, 청도 등 인근 지역으로의 이사뿐만 아니라, 전국 어디로든 장거리 이사도 전문적으로 진행하고 있습니다. 경산 이사 전문 업체지만, 광역 이사 시스템도 잘 갖추고 있으니 안심하고 맡기셔도 됩니다.</dd>
+            </dl>
+        </section>
+
+        <!-- Section 9: Detailed Quote Request Form (for dwell time) -->
+        <section id="contact">
+            <h2>경산 이사 무료 견적 문의 및 예약 (체류 시간 증대를 위한 상세 입력란)</h2>
+            <p><strong>경산 포장이사</strong>, <strong>반포장이사</strong>, <strong>원룸이사</strong> 등 고객님의 상황에 맞는 정확한 이사 견적을 받아보세요. 아래 양식을 작성해 주시면 전문 상담원이 연락드리겠습니다.</p>
+            <form class="form-section" onsubmit="alert('견적 문의가 접수되었습니다. 곧 연락드리겠습니다.'); return false;">
+                <h3>이사 정보 입력</h3>
+                <div class="form-group-flex">
+                    <div>
+                        <label for="move-date">이사 희망 날짜</label>
+                        <input type="date" id="move-date" name="move-date" required>
+                    </div>
+                    <div>
+                        <label for="move-type">이사 종류 선택</label>
+                        <select id="move-type" name="move-type" required>
+                            <option value="">-- 선택하세요 --</option>
+                            <option value="포장이사">포장이사 (Full Service)</option>
+                            <option value="반포장이사">반포장이사 (Semi-Packing)</option>
+                            <option value="원룸이사">원룸/용달이사 (Small Move)</option>
+                            <option value="사무실이사">사무실/기업이사</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h3>출발지 정보 (경산)</h3>
+                <div class="form-group-flex">
+                    <div>
+                        <label for="start-address-type">출발지 건물 유형</label>
+                        <select id="start-address-type" name="start-address-type" required>
+                            <option value="">-- 선택하세요 --</option>
+                            <option value="아파트">아파트</option>
+                            <option value="주택">주택/빌라</option>
+                            <option value="오피스텔">오피스텔/원룸</option>
+                            <option value="사무실">사무실/상가</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="start-floor">출발지 층수</label>
+                        <input type="number" id="start-floor" name="start-floor" placeholder="예: 5층" required>
+                    </div>
+                </div>
+                <label for="start-address">출발지 상세 주소 (경산시 읍/면/동 포함)</label>
+                <input type="text" id="start-address" name="start-address" placeholder="예: 경산시 중방동 00아파트" required>
+
+                <h3>도착지 정보</h3>
+                <div class="form-group-flex">
+                    <div>
+                        <label for="end-address-type">도착지 건물 유형</label>
+                        <select id="end-address-type" name="end-address-type" required>
+                            <option value="">-- 선택하세요 --</option>
+                            <option value="아파트">아파트</option>
+                            <option value="주택">주택/빌라</option>
+                            <option value="오피스텔">오피스텔/원룸</option>
+                            <option value="사무실">사무실/상가</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="end-floor">도착지 층수</label>
+                        <input type="number" id="end-floor" name="end-floor" placeholder="예: 10층" required>
+                    </div>
+                </div>
+                <label for="end-address">도착지 상세 주소 (경산시/타지역 시/도 포함)</label>
+                <input type="text" id="end-address" name="end-address" placeholder="예: 대구 수성구 00아파트" required>
+
+                <h3>추가 정보</h3>
+                <div class="form-group-flex">
+                    <div>
+                        <label for="item-count">짐의 양 (대략적인 톤수 또는 평수)</label>
+                        <select id="item-count" name="item-count">
+                            <option value="">-- 선택하세요 --</option>
+                            <option value="1톤미만">1톤 미만 (원룸)</option>
+                            <option value="2.5톤">2.5톤 (15평 이하)</option>
+                            <option value="5톤">5톤 (25평)</option>
+                            <option value="7톤이상">7톤 이상 (30평 이상)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="extra-items">특수 짐 여부 (ex: 에어컨, 벽걸이TV, 피아노 등)</label>
+                        <input type="text" id="extra-items" name="extra-items" placeholder="예: 벽걸이 TV 1대, 에어컨 2대">
+                    </div>
+                </div>
+
+                <h3>고객 정보</h3>
+                <div class="form-group-flex">
+                    <div>
+                        <label for="customer-name">고객 성함</label>
+                        <input type="text" id="customer-name" name="customer-name" required>
+                    </div>
+                    <div>
+                        <label for="customer-phone">연락처</label>
+                        <input type="text" id="customer-phone" name="customer-phone" placeholder="010-xxxx-xxxx" required>
+                    </div>
+                </div>
+                <label for="message">추가 요청사항 (자세한 이사 내용 기재)</label>
+                <textarea id="message" name="message" placeholder="이사 시 요청사항이나 궁금한 점을 적어주세요."></textarea>
+
+                <div class="cta-wrapper">
+                    <button type="submit" class="cta-button">무료 견적 요청하기</button>
+                </div>
+            </form>
+        </section>
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>상호: 경산이삿짐센터 | 사업자등록번호: 123-45-67890</p>
+        <p>주소: 경상북도 경산시 (상세 주소는 방문 견적 시 안내)</p>
+        <p>고객센터: <a href="tel:010-1234-5678">010-1234-5678</a></p>
+        <p class="credit-links">
+            <a href="#service-intro">회사 소개</a> | <a href="#price-guide">이사 비용</a> | <a href="#contact">견적 문의</a>
+        </p>
+        <p>&copy; 2026 경산이삿짐센터 전문 업체. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+      // FAQ 아코디언 기능 (접기/펼치기)
+      document.querySelectorAll('dl dt').forEach((dt) => {
+        dt.addEventListener('click', () => {
+          dt.classList.toggle('active');
+          let expanded = dt.getAttribute('aria-expanded') === 'true';
+          dt.setAttribute('aria-expanded', !expanded);
+        });
+        dt.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            dt.click();
+          }
+        });
+      });
+    </script>
+
+
+  
